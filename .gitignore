@@ -1,0 +1,14 @@
+# Ignore raw data files and download extras
+~/Downloads/
+*.md.draft
+Gemini-_53.md
+Gemini-*.md
+
+# Linux & Editor artifacts
+*~
+.*.swp
+.swp
+.DS_Store
+
+# Script backups
+*.py.draft
