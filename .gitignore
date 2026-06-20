@@ -1,5 +1,5 @@
 # Ignore raw data files and download extras
-~/Downloads/
+incoming/
 *.md.draft
 Gemini-_53.md
 Gemini-*.md
