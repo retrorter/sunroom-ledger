@@ -35,23 +35,35 @@ def run_unified_ingestion():
     ROUTING_MATRIX = [
         {
             "target_file": inventory_dir / "ficus-canopy.md",
-            "keywords": ["ficus", "audrey", "ruby", "tineke", "stipule", "girdling", "layering", "auxin", "bop"]
+            "keywords": ["ficus", "audrey", "ruby", "tineke", "stipula", "stipule", "girdling", "layering", "auxin"]
         },
         {
-            "target_file": inventory_dir / "heirloom-aloes.md",
-            "keywords": ["aloe", "pup", "rhizome", "debridement", "heirloom", "vascular"]
+            "target_file": inventory_dir / "strelitzia-nicolai.md",
+            "keywords": ["strelitzia", "nicolai", "bird of paradise", "bop", "unfurling", "sheathed"]
         },
         {
             "target_file": inventory_dir / "monstera-deliciosa.md",
             "keywords": ["monstera", "deliciosa", "happy frog", "propagation"]
         },
         {
+            "target_file": inventory_dir / "zz-collection.md",
+            "keywords": ["zz", "zamioculcas", "rhizome"]
+        },
+        {
+            "target_file": inventory_dir / "heirloom-aloes.md",
+            "keywords": ["aloe", "pup", "debridement", "heirloom", "terracotta"]
+        },
+        {
+            "target_file": prop_dir / "2026-june-succulents.md",
+            "keywords": ["crassula", "ovata", "ripple", "jade", "kalanchoe", "apical", "succulent", "succulents", "top dress"]
+        },
+        {
             "target_file": prop_dir / "2026-june-herbs.md",
-            "keywords": ["thyme", "basil", "rosemary", "mint", "spearmint", "bolting", "death plug", "herbs", "arugula", "brassica", "sow"]
+            "keywords": ["thyme", "basil", "rosemary", "mint", "spearmint", "death plug", "herbs", "arugula", "sowing", "1020"]
         },
         {
             "target_file": repo_root / "technical-deep-dives.md",
-            "keywords": ["btrfs", "snapper", "ntp", "stratum", "linux", "y2k", "git", "ingest.py", "geany", "database", "wc", "awk", "tmux", "powerline", "vscodium", "alias", "dotfiles", "less", "vim"]
+            "keywords": ["btrfs", "snapper", "ntp", "stratum", "linux", "y2k", "git", "ingest.py", "geany", "database", "wc", "awk", "sql"]
         }
     ]
 
@@ -81,7 +93,7 @@ def run_unified_ingestion():
         print(f"[SUCCESS] Boundary anchor verified at line {start_index}. Truncating legacy log drift.")
         active_lines = lines[start_index:]
         # line below used for full dump to catch exception for fallthrough else
-        # active_lines = lines
+        active_lines = lines
     else:
         print("[WARN] No standard boundary anchors found. Processing raw text from index 0.")
         active_lines = lines
@@ -111,12 +123,10 @@ def run_unified_ingestion():
         # Step 5b: Evaluate explicit developer-overridden tags: ## [ROUTING: filename]
         explicit_match = re.search(r"##\s+\[ROUTING:\s*([\w-]+)\]", combined_payload)
         
-		# Extract the replacement out of the f-string expression to avoid pre-3.12 backslash limits
-        formatted_prompt = prompt_str.replace('\n', '\n>')
-        
+        # Aligned formatting block mimicking your verified Keep note design
         constructed_record = (
             f"## Interaction Record\n\n"
-            f"### User Prompt\n>{formatted_prompt}\n\n"
+            f"### User Prompt\n>{prompt_str}\n\n"
             f"### System Response\n{response_str}\n\n"
             f"---\n\n"
         )
