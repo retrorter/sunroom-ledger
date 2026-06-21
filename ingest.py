@@ -9,99 +9,56 @@ def run_unified_ingestion():
     incoming_dir = repo_root / "incoming"
     inventory_dir = repo_root / "inventory"
     prop_dir = repo_root / "propagation-logs"
+    logs_dir = repo_root / "logs"
+    archive_dir = logs_dir / "archive"
     glossary_file = repo_root / "docs" / "glossary.md"
     catch_all_file = repo_root / "unclassified-logs.md"
+    offtopic_file = logs_dir / "offtopic_history.md"
 
     # Ensure targeted spatial directories exist
     incoming_dir.mkdir(exist_ok=True)
     inventory_dir.mkdir(exist_ok=True)
     prop_dir.mkdir(exist_ok=True)
+    logs_dir.mkdir(exist_ok=True)
+    archive_dir.mkdir(exist_ok=True)
     glossary_file.parent.mkdir(exist_ok=True)
 
-    # 2. Dynamically Locate Ingestion Source (Saves download suffix collisions)
+    # 2. Dynamically Locate All Ingestion Sources (Sorted Chronologically)
     source_files = sorted(list(incoming_dir.glob("*.md")), key=os.path.getmtime)
     if not source_files:
         print(f"[ERROR] No markdown data export found within: {incoming_dir.relative_to(repo_root)}/")
-        print("Drop your browser markdown export file directly into that directory to proceed.")
+        print("Drop your browser markdown export files directly into that directory to proceed.")
         return
     
-    raw_file_path = source_files[-1]  # Pulls the most recently modified markdown file
-    print(f"[INFO] Initializing ingestion matrix from target: {raw_file_path.name}")
-    
-    with open(raw_file_path, "r", encoding="utf-8") as f:
-        lines = f.readlines()
+    print(f"[INFO] Found {len(source_files)} file(s) queued for ingestion. Processing pipeline...")
 
-    # 3. Establish the Structural Classification Routing Matrix
+    # Define Category-Level Classification Routing Matrix
     ROUTING_MATRIX = [
         {
-            "target_file": inventory_dir / "ficus-canopy.md",
-            "keywords": ["ficus", "audrey", "ruby", "tineke", "stipula", "stipule", "girdling", "layering", "auxin"]
+            "target_file": inventory_dir / "arids.md",
+            "keywords": ["aloe", "pup", "debridement", "heirloom", "terracotta", "crassula", "ovata", "ripple", "jade", "kalanchoe", "apical", "succulent", "succulents", "top dress", "sansevieria"]
         },
         {
-            "target_file": inventory_dir / "strelitzia-nicolai.md",
-            "keywords": ["strelitzia", "nicolai", "bird of paradise", "bop", "unfurling", "sheathed"]
+            "target_file": inventory_dir / "tropicals.md",
+            "keywords": ["ficus", "audrey", "ruby", "tineke", "stipula", "stipule", "girdling", "layering", "auxin", "monstera", "deliciosa", "happy frog", "propagation", "philodendron", "bop", "strelitzia", "nicolai", "bird of paradise", "unfurling", "sheathed", "aroid"]
         },
         {
-            "target_file": inventory_dir / "monstera-deliciosa.md",
-            "keywords": ["monstera", "deliciosa", "happy frog", "propagation"]
+            "target_file": inventory_dir / "infrastructure.md",
+            "keywords": ["lighting", "utilitech", "tray", "pvc", "pp", "hdpe", "pots", "orchid", "ballast", "rainsoft", "carbon", "hardware", "racks", "plastic", "embrittlement", "welding", "creep", "fatigue", "uv"]
         },
         {
-            "target_file": inventory_dir / "zz-collection.md",
-            "keywords": ["zz", "zamioculcas", "rhizome"]
+            "target_file": inventory_dir / "crops.md",
+            "keywords": ["jalapeno", "pepper", "ginger", "rhizome", "macronutrient", "monty", "emulsion", "nightshades", "banana", "blossom-end", "calcium"]
         },
         {
-            "target_file": inventory_dir / "heirloom-aloes.md",
-            "keywords": ["aloe", "pup", "debridement", "heirloom", "terracotta"]
-        },
-        {
-            "target_file": prop_dir / "2026-june-succulents.md",
-            "keywords": ["crassula", "ovata", "ripple", "jade", "kalanchoe", "apical", "succulent", "succulents", "top dress"]
-        },
-        {
-            "target_file": prop_dir / "2026-june-herbs.md",
-            "keywords": ["thyme", "basil", "rosemary", "mint", "spearmint", "death plug", "herbs", "arugula", "sowing", "1020"]
+            "target_file": inventory_dir / "herbs.md",
+            "keywords": ["thyme", "basil", "rosemary", "mint", "spearmint", "death plug", "herbs", "arugula", "sowing", "1020", "biomass", "pinching"]
         },
         {
             "target_file": repo_root / "technical-deep-dives.md",
-            "keywords": ["btrfs", "snapper", "ntp", "stratum", "linux", "y2k", "git", "ingest.py", "geany", "database", "wc", "awk", "sql"]
+            "keywords": ["btrfs", "snapper", "ntp", "stratum", "linux", "y2k", "git", "ingest.py", "geany", "database", "wc", "awk", "sql", "regex", "pipeline", "parser"]
         }
     ]
-
-    # 4. Determine Truncation Bounds (Anchors)
-    start_index = 0
-    found_anchor = False
-    
-    # Priority A: Check for the Contiguous System Sync Point Marker
-    for idx, line in enumerate(lines):
-        if "SYSTEM_SYNC_POINT" in line:
-            start_index = idx
-            found_anchor = True
-            break
-            
-    # Priority B: Fall back to historical text anchor if no system token exists
-    if not found_anchor:
-        for idx, line in enumerate(lines):
-            if "plastic pot happy frog potting soil" in line:
-                start_index = idx
-                # Backtrack to catch the preceding "# you asked" block cleanly
-                while start_index > 0 and not lines[start_index].lower().startswith("# you asked"):
-                    start_index -= 1
-                found_anchor = True
-                break
-
-    if found_anchor:
-        print(f"[SUCCESS] Boundary anchor verified at line {start_index}. Truncating legacy log drift.")
-        active_lines = lines[start_index:]
-        # line below used for full dump to catch exception for fallthrough else
-        active_lines = lines
-    else:
-        print("[WARN] No standard boundary anchors found. Processing raw text from index 0.")
-        active_lines = lines
-
-    # 5. Core State-Machine Turn Parser & Dynamic Router
-    current_prompt = []
-    current_response = []
-    state = None
 
     def execute_routing(prompt_block, response_block):
         prompt_str = "".join(prompt_block).strip()
@@ -109,7 +66,21 @@ def run_unified_ingestion():
         combined_payload = f"{prompt_str}\n\n{response_str}"
         search_payload = combined_payload.lower()
 
-        # Step 5a: Sift for and isolate Glossary Entries natively on the fly
+        constructed_record = (
+            f"## Interaction Record\n\n"
+            f"### User Prompt\n>{prompt_str}\n\n"
+            f"### System Response\n{response_str}\n\n"
+            f"---\n\n"
+        )
+
+        # Step A: Global Intercept -> Siphon OFFTOPIC commentary immediately
+        if "offtopic" in search_payload:
+            with open(offtopic_file, "a", encoding="utf-8") as out_f:
+                out_f.write(constructed_record)
+            print(f"   [OFFTOPIC SIPHON] -> logs/{offtopic_file.name}")
+            return
+
+        # Step B: Sift and isolate Glossary Entries natively on the fly
         glossary_pattern = r"(###\s+[^:\n]+\s+::\s+[^\n]+)\n+([^\n#]+)"
         glossary_entries = re.findall(glossary_pattern, response_str)
         if glossary_entries:
@@ -120,62 +91,106 @@ def run_unified_ingestion():
                     gf.write(f"{header}\n{definition}\n\n")
             print(f"   [GLOSSARY] -> Extracted {len(glossary_entries)} term(s) to docs/{glossary_file.name}")
 
-        # Step 5b: Evaluate explicit developer-overridden tags: ## [ROUTING: filename]
+        # Step C: Evaluate explicit developer-overridden tags: ## [ROUTING: filename]
         explicit_match = re.search(r"##\s+\[ROUTING:\s*([\w-]+)\]", combined_payload)
-        
-        # Aligned formatting block mimicking your verified Keep note design
-        constructed_record = (
-            f"## Interaction Record\n\n"
-            f"### User Prompt\n>{prompt_str}\n\n"
-            f"### System Response\n{response_str}\n\n"
-            f"---\n\n"
-        )
 
         if explicit_match:
             override_name = f"{explicit_match.group(1)}.md"
             override_path = prop_dir / override_name
             with open(override_path, "a", encoding="utf-8") as out_f:
                 out_f.write(constructed_record)
-            print(f"[EXPLICIT OVERRIDE] -> {override_name}")
+            print(f"   [EXPLICIT OVERRIDE] -> propagation-logs/{override_name}")
             return
 
-        # Step 5c: Drop through to standard keyword matrix scan
+        # Step D: Drop through to standard keyword matrix scan
         for route in ROUTING_MATRIX:
             if any(keyword in search_payload for keyword in route["keywords"]):
                 with open(route["target_file"], "a", encoding="utf-8") as out_f:
                     out_f.write(constructed_record)
-                print(f"[ROUTED] -> {route['target_file'].relative_to(repo_root)}")
+                print(f"   [ROUTED] -> {route['target_file'].relative_to(repo_root)}")
                 return
 
-        # Step 5d: Fallback bucket for unclassified content
+        # Step E: Fallback bucket for unclassified content
         with open(catch_all_file, "a", encoding="utf-8") as out_f:
             out_f.write(constructed_record)
-        print(f"[CATCH-ALL] -> {catch_all_file.name}")
+        print(f"   [CATCH-ALL] -> {catch_all_file.name}")
 
-    # Run state machine loop across text stream
-    for line in active_lines:
-        line_lower = line.lower()
-        if line_lower.startswith("# you asked"):
-            if current_prompt and current_response:
-                execute_routing(current_prompt, current_response)
-                current_prompt = []
-                current_response = []
-            state = "PROMPT"
-            continue
-        elif line_lower.startswith("# gemini response"):
-            state = "RESPONSE"
-            continue
+    # 3. Iterate through every file found in the incoming directory queue
+    for raw_file_path in source_files:
+        print(f"\n[PROCESSING FILE] -> {raw_file_path.name}")
+        
+        with open(raw_file_path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
 
-        if state == "PROMPT":
-            current_prompt.append(line)
-        elif state == "RESPONSE":
-            current_response.append(line)
+        start_index = 0
+        found_anchor = False
+        
+        # =====================================================================
+        # Step E: Locate the historical baseline synchronization anchor
+        # =====================================================================
+        found_anchor = False
+        boundary_index = 0
 
-    # Process final segment remaining in buffer at EOF
-    if current_prompt and current_response:
-        execute_routing(current_prompt, current_response)
+        # Forward scan from top-to-bottom to catch the historical instance first
+        for idx, line in enumerate(lines):
+            if "galaxy phone through the search widget" in line.lower():
+                # Rewind to the parent prompt header (# you asked)
+                start_index = idx
+                while start_index > 0 and not lines[start_index].lower().startswith("# you asked"):
+                    start_index -= 1
+                
+                boundary_index = start_index
+                found_anchor = True
+                print(f"   [SUCCESS] Baseline anchor located at line {idx}. Slicing history from line {boundary_index}.")
+                break
 
-    print("[STATUS] Synchronization matrix pipeline run complete.")
+        if found_anchor:
+            active_lines = lines[boundary_index:]
+        else:
+            print("   [WARN] Unique baseline anchor not found. Processing raw text from index 0.")
+            active_lines = lines
+        if found_anchor:
+            print(f"   [SUCCESS] Boundary anchor verified at line {start_index}. Truncating legacy drift.")
+            active_lines = lines[start_index:]
+        else:
+            print("   [WARN] No standard boundary anchors found. Processing raw text from index 0.")
+            active_lines = lines
+
+        # State-Machine Turn Parser Loop for current file
+        current_prompt = []
+        current_response = []
+        state = None
+
+        for line in active_lines:
+            line_lower = line.lower()
+            if line_lower.startswith("# you asked"):
+                if current_prompt and current_response:
+                    execute_routing(current_prompt, current_response)
+                    current_prompt = []
+                    current_response = []
+                state = "PROMPT"
+                continue
+            elif line_lower.startswith("# gemini response"):
+                state = "RESPONSE"
+                continue
+
+            if state == "PROMPT":
+                current_prompt.append(line)
+            elif state == "RESPONSE":
+                current_response.append(line)
+
+        # Handle remaining buffer trailing turn at EOF for current file
+        if current_prompt and current_response:
+            execute_routing(current_prompt, current_response)
+
+        # Step F: Safe post-processing archival move execution
+        archive_target_path = archive_dir / raw_file_path.name
+        if archive_target_path.exists():
+            archive_target_path.unlink()  # Prevent collision errors on repeated filename testing
+        raw_file_path.rename(archive_target_path)
+        print(f"   [ARCHIVED] -> logs/archive/{raw_file_path.name}")
+
+    print("\n[STATUS] Synchronization matrix pipeline run complete for all files.")
 
 if __name__ == "__main__":
     run_unified_ingestion()

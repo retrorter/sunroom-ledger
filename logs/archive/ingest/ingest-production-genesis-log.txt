@@ -1,0 +1,1095 @@
+ ray@woodrabbit:~/sunroom-ledger$ ./ingest.py
+
+[INFO] Found 1 file(s) queued for ingestion. Processing pipeline...
+
+
+[PROCESSING FILE] -> Gemini-_25.md
+
+   [SUCCESS] Baseline anchor located at line 4. Slicing history from line 2.
+
+   [SUCCESS] Boundary anchor verified at line 2. Truncating legacy drift.
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/herbs.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [CATCH-ALL] -> unclassified-logs.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [CATCH-ALL] -> unclassified-logs.md
+
+   [CATCH-ALL] -> unclassified-logs.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/herbs.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/herbs.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/herbs.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/herbs.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/herbs.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/herbs.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [GLOSSARY] -> Extracted 3 term(s) to docs/glossary.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [GLOSSARY] -> Extracted 2 term(s) to docs/glossary.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/monstera.md
+
+   [GLOSSARY] -> Extracted 1 term(s) to docs/glossary.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/monstera.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/filename.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/monstera.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [CATCH-ALL] -> unclassified-logs.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/filename.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/monstera.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/specimen-name.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/garden-supplies.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/tropical-canopy.md
+
+   [ROUTED] -> inventory/tropicals.md
+
+   [GLOSSARY] -> Extracted 1 term(s) to docs/glossary.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [GLOSSARY] -> Extracted 1 term(s) to docs/glossary.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [GLOSSARY] -> Extracted 1 term(s) to docs/glossary.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/technical-deep-dives.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> technical-deep-dives.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [GLOSSARY] -> Extracted 2 term(s) to docs/glossary.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/tropical-canopy.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [GLOSSARY] -> Extracted 1 term(s) to docs/glossary.md
+
+   [EXPLICIT OVERRIDE] -> propagation-logs/project-filename.md
+
+   [GLOSSARY] -> Extracted 4 term(s) to docs/glossary.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [GLOSSARY] -> Extracted 1 term(s) to docs/glossary.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [ROUTED] -> inventory/arids.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [CATCH-ALL] -> unclassified-logs.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [ROUTED] -> inventory/infrastructure.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [OFFTOPIC SIPHON] -> logs/offtopic_history.md
+
+   [ARCHIVED] -> logs/archive/Gemini-_25.md
+
+
+[STATUS] Synchronization matrix pipeline run complete for all files. 

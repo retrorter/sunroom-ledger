@@ -9,12 +9,10 @@ A localized zone of water saturation that occurs when a fine-textured substrate 
 ### photoperiodism :: botany
 The physiological reaction of organisms to the length of day or night, dictating vegetative growth versus reproductive bolting cycles.
 
-### term :: category`), appends them cleanly to `docs/glossary.md`, and drops the remaining text into a running chronological log file.
-```python
+### Polypropylene (PP) :: Infrastructure
+A highly crystalline thermoplastic polymer known for exceptional fatigue resistance and chemical inertness across typical horticultural pH ranges. It serves as the ideal structural material for heavy-duty propagation trays and slotted pots due to its high melting point and ability to withstand repeated mechanical stress without stress-cracking or leaching plasticizers into the root zone.
 
-### term :: category' blocks and the definition line directly below them
-    glossary_pattern = r"(
+### High-Density Polyethylene (HDPE) :: Infrastructure
+A robust petroleum-terminated polymer characterized by large density-to-strength ratios and superior UV-stabilization properties. It is highly resistant to structural brittleness under intense solar or high-output grow light arrays, making it the preferred choice for long-term outdoor staging vessels and heavy ballast sub-trays where structural integrity under weight is paramount.
 
-### term :: category` entries for the centralized glossary, and uses a regular expression engine to split and append text blocks directly to their corresponding files based on your `## [ROUTING: filename]` targets.
-```python
 
