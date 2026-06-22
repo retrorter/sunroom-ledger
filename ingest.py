@@ -11,7 +11,7 @@ def run_unified_ingestion():
     prop_dir = repo_root / "propagation-logs"
     logs_dir = repo_root / "logs"
     archive_dir = logs_dir / "archive"
-    glossary_file = repo_root / "docs" / "glossary.md"
+    docs_dir = repo_root / "docs"
     catch_all_file = repo_root / "unclassified-logs.md"
     offtopic_file = logs_dir / "offtopic_history.md"
 
@@ -21,7 +21,7 @@ def run_unified_ingestion():
     prop_dir.mkdir(exist_ok=True)
     logs_dir.mkdir(exist_ok=True)
     archive_dir.mkdir(exist_ok=True)
-    glossary_file.parent.mkdir(exist_ok=True)
+    docs_dir.mkdir(exist_ok=True)
 
     # 2. Dynamically Locate All Ingestion Sources (Sorted Chronologically)
     source_files = sorted(list(incoming_dir.glob("*.md")), key=os.path.getmtime)
@@ -80,18 +80,7 @@ def run_unified_ingestion():
             print(f"   [OFFTOPIC SIPHON] -> logs/{offtopic_file.name}")
             return
 
-        # Step B: Sift and isolate Glossary Entries natively on the fly
-        glossary_pattern = r"(###\s+[^:\n]+\s+::\s+[^\n]+)\n+([^\n#]+)"
-        glossary_entries = re.findall(glossary_pattern, response_str)
-        if glossary_entries:
-            with open(glossary_file, "a", encoding="utf-8") as gf:
-                if glossary_file.stat().st_size == 0:
-                    gf.write("# Sunroom & Technical Glossary\n\n")
-                for header, definition in glossary_entries:
-                    gf.write(f"{header}\n{definition}\n\n")
-            print(f"   [GLOSSARY] -> Extracted {len(glossary_entries)} term(s) to docs/{glossary_file.name}")
-
-        # Step C: Evaluate explicit developer-overridden tags: ## [ROUTING: filename]
+        # Step B: Evaluate explicit developer-overridden tags: ## [ROUTING: filename]
         explicit_match = re.search(r"##\s+\[ROUTING:\s*([\w-]+)\]", combined_payload)
 
         if explicit_match:
@@ -102,7 +91,7 @@ def run_unified_ingestion():
             print(f"   [EXPLICIT OVERRIDE] -> propagation-logs/{override_name}")
             return
 
-        # Step D: Drop through to standard keyword matrix scan
+        # Step C: Drop through to standard keyword matrix scan
         for route in ROUTING_MATRIX:
             if any(keyword in search_payload for keyword in route["keywords"]):
                 with open(route["target_file"], "a", encoding="utf-8") as out_f:
@@ -110,7 +99,7 @@ def run_unified_ingestion():
                 print(f"   [ROUTED] -> {route['target_file'].relative_to(repo_root)}")
                 return
 
-        # Step E: Fallback bucket for unclassified content
+        # Step D: Fallback bucket for unclassified content
         with open(catch_all_file, "a", encoding="utf-8") as out_f:
             out_f.write(constructed_record)
         print(f"   [CATCH-ALL] -> {catch_all_file.name}")
@@ -123,11 +112,6 @@ def run_unified_ingestion():
             lines = f.readlines()
 
         start_index = 0
-        found_anchor = False
-        
-        # =====================================================================
-        # Step E: Locate the historical baseline synchronization anchor
-        # =====================================================================
         found_anchor = False
         boundary_index = 0
 
@@ -183,7 +167,7 @@ def run_unified_ingestion():
         if current_prompt and current_response:
             execute_routing(current_prompt, current_response)
 
-        # Step F: Safe post-processing archival move execution
+        # Step E: Safe post-processing archival move execution
         archive_target_path = archive_dir / raw_file_path.name
         if archive_target_path.exists():
             archive_target_path.unlink()  # Prevent collision errors on repeated filename testing
