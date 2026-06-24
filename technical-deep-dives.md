@@ -541,6 +541,7 @@ What does the text of that broadcast message say, or has the machine already beg
 ### 🧠 Diagnostic: The OOM Killer to the Rescue
 
 The visual evidence in file `570fc8ad-5dd1-4b86-97f2-783901e9d723` confirms the exact diagnosis: a classic Linux kernel Out-Of-Memory (OOM) intervention on your LMDE 6 box (`woodrabbit`). 
+![OOM TTY2 frozen](../media/570fc8ad-5dd1-4b86-97f2-783901e9d723.jpg)
 
 The kernel finally pulled the emergency brake and reaped the primary resource hog:
 *   **The Target:** `Process 738506 (Isolated Web Co)` is a sandboxed Firefox web content thread—specifically, the exact tab rendering the massive master thread DOM that triggered the freeze.
@@ -556,6 +557,7 @@ You don't need to power down or use the Magic SysRq sequence anymore. The kernel
 
 ### 1. Re-test the TTY Prompt
 The login prompt on `tty2` shown in file `570fc8ad-5dd1-4b86-97f2-783901e9d723` should be responsive now. Hit `Enter` a few times to get a fresh login line, or drop to a clean prompt.
+![OOM TTY2 frozen](../media/570fc8ad-5dd1-4b86-97f2-783901e9d723.jpg)
 
 ### 2. Check the Graphical Display Server
 Since only the offending tab's content process was targeted, your main Firefox UI frame and Cinnamon/X-server desktop environment might have survived the blast. 
@@ -656,4 +658,3 @@ Once you have the text safely isolated in `scratchpad_tail.md`, are you ready to
 ---
 
 ---
-
