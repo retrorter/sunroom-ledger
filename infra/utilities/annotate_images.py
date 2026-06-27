@@ -64,8 +64,19 @@ def interactive_binder():
             
         print(f"📍 LOG:   {target_file.relative_to(repo_root)}")
         print(f"📝 AI CONTEXT:\n   \"{found_context}\"\n")
-        # ─── ADD THESE TWO LINES HERE TO AUTOMATE FEH ───────────────────
+        
+        # ─── FEH AUTOMATION & X11 FOCUS RETENTION ──────────────────────
         import subprocess
+        import shutil
+
+        # Interrogate X11 for the terminal window ID before feh alters the state
+        try:
+            term_id_dec = subprocess.check_output(["xdotool", "getactivewindow"]).decode().strip()
+            term_window_hex = f"0x{int(term_id_dec):08x}"
+        except Exception as e:
+            term_id_dec = term_window_hex = None
+            print(f"⚠️ Focus Warning: Failed to parse terminal window ID: {e}")
+
         # Open feh completely decoupled from the terminal's STDIN
         feh_proc = subprocess.Popen(
             ["feh", "--geometry", "400x400+1200+0", str(repo_root / "media" / filename)],
@@ -73,7 +84,24 @@ def interactive_binder():
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
-        # ──
+        
+        # Asynchronously force focus back *after* python settles into input()
+        if term_id_dec:
+            has_wmctrl = shutil.which("wmctrl") is not None
+            focus_executor = f"wmctrl -i -a {term_window_hex}" if has_wmctrl else f"xdotool windowactivate {term_id_dec}"
+            
+            # Stripped xdotool search to eliminate background subshell deadlocks.
+            # The 0.5 sleep gives Cinnamon total freedom to map the window before we yank focus.
+            focus_cmd = f"sleep 0.35 && {focus_executor} && xdotool windowfocus {term_id_dec}"
+            
+            subprocess.Popen(
+                focus_cmd, 
+                shell=True, 
+                stdin=subprocess.DEVNULL, 
+                stdout=subprocess.DEVNULL, 
+                stderr=subprocess.DEVNULL
+            )
+        # ────────────────────────────────────────────────────────────────
         
         # Check if a markdown image link already exists for this UUID
         link_pattern = re.compile(r'!\[(.*?)\]\((../)?media/' + re.escape(filename) + r'\)')
@@ -87,7 +115,8 @@ def interactive_binder():
 
         # Prompt the user for input
         user_input = input("\nEnter Description (or 'q' to quit): ").strip()
-        # ─── ADD THIS LINE HERE TO AUTO-CLOSE FEH ────────────────────────
+        
+        # ─── AUTO-CLOSE FEH ─────────────────────────────────────────────
         feh_proc.terminate()
         # ────────────────────────────────────────────────────────────────
         
