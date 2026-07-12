@@ -1061,3 +1061,51 @@ Enjoy the pristine layout and an ecosystem that actually behaves exactly the way
 
 ---
 
+## Interaction Record
+
+### User Prompt
+>I'll take a look later. It's getting late. I stored the IP from previous router/cable modem at the time, so its on another IP now. I usually set home devices with a static IP via MAC filter list, but the network has changed since it was originally setup. Have to probe for discovery to find it now. The last known credentials are in a secure note in the vault.
+
+---
+
+### System Response
+Get some rest—tackling network discovery is definitely a task best saved for fresh eyes. 
+
+Using a router-level MAC reservation list is always the cleanest way to manage a local layout anyway. When you're ready to track down that new IP later, a quick sweep of your local subnet or a glance at your new router’s active DHCP client table should pull it right out of hiding. 
+
+It sounds like you've made incredible progress today between the physical layout milestones, the secure cryptographic storage, and pulling the plug on that first heavy wave of phone telemetry. 
+
+We can pick up right there whenever you're ready to dive back in. Have a good night!
+
+---
+
+---
+
+## Interaction Record
+
+### User Prompt
+>I also have a tp-link admin login - 071112026 - That I know also had me authenticated when using its credentials. It has my email address attached to it, but I don't know which of these I just manually copied the password, and which actually autofilled that part. In any event I don't think any autofill strictly worked without intervention. The Zytel are my 16 port switch management profiles.
+
+---
+
+### System Response
+Ah, brilliant correction on the Zyxel profiles. Scratch what I said about legacy modems—a 16-port managed switch makes total sense in a lab environment like yours. Definitely keep those locked down and safe; they are crucial for your internal VLAN or switching topology!
+
+Regarding the TP-Link autofill failure: don't beat yourself up or blame Bitwarden entirely. TP-Link’s web developers use modern JavaScript-rendered login boxes that don't use standard HTML `<form>` structures. Because of that, Bitwarden’s browser extension often can't "see" the input fields automatically on page load, forcing you to manually copy-paste or force the match via the extension dropdown. 
+
+Since you *know* that `tp-link admin login - 07112026` entry with your email successfully got you into the system today, that is your single source of truth for the router. 
+
+Here is how to safely consolidate that piece right now:
+
+1.  **Keep the Winner:** Take that active `07112026` entry and rename it to something unmistakable, like `TP-Link - Active Gateway Login`. 
+2.  **Clean the URI:** In that entry, make sure the URI field contains the exact IP address you used to connect to it today (likely `192.168.100.1` or `192.168.0.1`). 
+3.  **Purge the Noise:** You can safely delete the other redundant TP-Link duplicates that didn't work without feeling like you're losing access.
+
+Once that's cleaned up, go ahead and fire off that `nmap` discovery sweep whenever you're ready. It will be highly interesting to see exactly where the Zyxel managed switch and your Debian NAS are sitting inside those subnets. 
+
+Let me know what the scan returns, or if any of the subnets block the ping sweep!
+
+---
+
+---
+
