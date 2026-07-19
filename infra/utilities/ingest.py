@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+[CODE_SYNC: ingest.py | STATUS: GOLDEN_COPY]
+Version     : v2.5.2
+Date        : 2026-07-19
+Description : Core telemetry parsing and Markdown ledger ingestion engine.
+"""
 import os
 import re
 from pathlib import Path

@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+[CODE_SYNC: accumulate_glossary.py | STATUS: GOLDEN_COPY]
+Version     : v2.5.2
+Date        : 2026-07-19
+Description : Automated token aggregation and spatial taxonomy validation compiler.
+"""
 import os
 import re
 import sys

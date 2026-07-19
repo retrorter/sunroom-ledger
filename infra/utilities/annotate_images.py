@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+[CODE_SYNC: annotate_images.py | STATUS: GOLDEN_COPY]
+Version     : v2.5.2
+Date        : 2026-07-19
+Description : Image asset metadata annotation and batch token validation engine.
+"""
 import os
 import re
 from pathlib import Path
