@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
 GOLDEN_STATE PRODUCTION SCRIPT: ingest_light.py
-Description: Interactive CLI wizard to record photosynthetically active radiation (PAR)
-             measurements across selectable path scopes, handle dynamic ad-hoc node additions,
-             compute Daily Light Integral (DLI), and save structured Markdown logs.
-Version: 2.3.0
+Description: Ultra-low-friction CLI wizard to capture PAR measurements. 
+             Supports single-line inline notes parsing (e.g. '185.2 maple shade').
+Version: 2.5.2
 State: GOLDEN_STATE
 """
 
@@ -22,23 +21,23 @@ class BotanicalNode:
     desc: str
     photo: str
 
-# Immutable Master Registry mapping all 29 valid property nodes
+# Immutable Master Registry mapping all updated property nodes
 GLOBAL_NODE_REGISTRY = [
     # I. ZONE: HOUSE BED & STEPS (Exterior - CCW Traversal)
-    BotanicalNode("V1", "House Bed", "Spigot Corner (0,0)", "housebed-v1-spigot-MCU.jpg"),
-    BotanicalNode("V_drop", "House Bed", "Step 0 / Porch Pad Drop-off", "front-view-PP-b_drop-V_drop-view"),
-    BotanicalNode("Step 1", "House Bed", "Diagonal Shadow Collection Point", "porch-stair-transition-mid-first-step-collecion-point-MS.jpg"),
-    BotanicalNode("V2", "House Bed", "Step 1 & 2 Vertex (Porch Front Edge)", "porchpad-step-1-diagonal-housebed.jpg"),
-    BotanicalNode("Step 4", "House Bed", "Outer Front Edge Midpoint (6,7)", "step-4-outer-midpoint-CU.jpg"),
-    BotanicalNode("V4", "House Bed", "Driveway Brick Corner (12,0)", "housebed-v4-garage-MS.jpg"),
-    BotanicalNode("Vmid", "House Bed", "Mid-Bed Canopy (6,3.5) [Last Exterior CCW Station]", "housebed-vmid-canopy-MS.jpg"),
+    BotanicalNode("Spigot", "House Bed", "Spigot Corner (0,0)", "hb_spigot_ws.jpg"),
+    BotanicalNode("h_drop", "House Bed", "Porch Pad 16-inch drop-off", "hb_h_drop_top.jpg"),
+    BotanicalNode("Step 1", "House Bed", "Inner stone boundary baseline", "hb_step1_boundary_ms.jpg"),
+    BotanicalNode("Step 2", "House Bed", "Diagonal vector crossing point", "hb_step2_diagonal_ms.jpg"),
+    BotanicalNode("Step 3", "House Bed", "1/4 along lower front stone edge", "hb_step3_quarter_edge_ms.jpg"),
+    BotanicalNode("Step 4", "House Bed", "Physical midpoint of front stone edge", "hb_step4_midpoint_cu.jpg"),
+    BotanicalNode("Drv", "House Bed", "Outside vertex corner at driveway line", "hb_driveway_vertex_ws.jpg"),
+    BotanicalNode("h_mid", "House Bed", "Interior mid-bed canopy center", "hb_mid_canopy_ms.jpg"),
 
-    # II. ZONE: BASEMENT BED (Exterior - Linear Traversal)
-    BotanicalNode("B_drop", "Basement Bed", "12\" Porch Drop-off (0,3)", "basementbed-bdrop-edge-MS.jpg"),
-    BotanicalNode("B1", "Basement Bed", "Herb/Succulent Core (1.5,1.5)", "basementbed-b1-herbs-MCU.jpg"),
-    BotanicalNode("B_mp", "Basement Bed", "Midpoint Stone Drop-off (6.5,3)", "basement-bed-6.5-3-coord-1659.jpg"),
-    BotanicalNode("B_edge", "Basement Bed", "House Corner Wall (13,0)", "basement-edge-NNW.jpg"),
-    BotanicalNode("Bmax", "Basement Bed", "Cul-de-sac Corner (13,3)", "basementbed-bmax-culdesac-WS.jpg"),
+    # II. ZONE: BASEMENT BED (Exterior - Linear Traversal Refactored)
+    BotanicalNode("b_drop", "Basement Bed", "Porch step 12-inch drop-off activity hub", "bb_drop_activity_ws.jpg"),
+    BotanicalNode("b_core", "Basement Bed", "High-intensity vector zone past drop-off", "bb_core_vector_ms.jpg"),
+    BotanicalNode("b_mid", "Basement Bed", "True physical midpoint of foundation wall length", "bb_mid_window_ms.jpg"),
+    BotanicalNode("b_max", "Basement Bed", "Cul-de-sac solar corner retaining wall", "bb_max_retaining_ws.jpg"),
 
     # III. ZONE: SUNROOM COHORT WALLS (Interior - Clockwise Traversal)
     BotanicalNode("LW1", "Sunroom", "Left Wall / NNW - Node 1", "sunroom-LW-NNW-1-facing-WS.jpg"),
@@ -64,13 +63,6 @@ GLOBAL_NODE_REGISTRY = [
     BotanicalNode("LA4", "Light Arrays", "SF1000 Fixture Enclosure 4", "hardware-la4-setup-CU.jpg")
 ]
 
-def parse_node_string(raw_string: str) -> tuple[str, Optional[str]]:
-    """Splits node string at the first hyphen to separate base ID from environmental modifier."""
-    parts = raw_string.split('-', 1)
-    base_id = parts[0].strip()
-    modifier = parts[1].strip() if len(parts) > 1 else None
-    return base_id, modifier
-
 def calculate_dli(par: float, photoperiod: float) -> float:
     """Computes DLI (mol/m²/day): PAR * photoperiod * 3600 / 1,000,000"""
     return round((par * photoperiod * 3600) / 1000000, 2)
@@ -82,38 +74,69 @@ def lookup_registered_node(base_id: str) -> Optional[BotanicalNode]:
             return node
     return None
 
-def capture_node_metrics(node: BotanicalNode, active_mod: Optional[str], full_id: str, photoperiod: float, sky_cond: str) -> dict:
-    """Executes the standardized internal parameter terminal input entry loop for a target node."""
+def capture_default_node(node: BotanicalNode, photoperiod: float) -> dict:
+    """Fast-path entry loop logic. Single line parses both float and optional inline notes."""
     while True:
+        raw_input = input("    PAR [Val + Note / Enter to skip]: ").strip()
+        
+        if not raw_input or raw_input.lower() in ['nan', 'skip', 'x']:
+            return {
+                "id": f"{node.id}-offline",
+                "zone": node.zone,
+                "par": 0.0,
+                "dli": 0.0,
+                "photo": node.photo,
+                "notes": "[OFFLINE] Fixture or station currently inactive/unmeasured"
+            }
+        
+        # Parse inline notes split by first space segment
+        input_segments = raw_input.split(maxsplit=1)
+        numeric_part = input_segments[0]
+        parsed_note = input_segments[1] if len(input_segments) > 1 else "Normal"
+        
         try:
-            par_input = input(f"  PAR value for {full_id} (umol/m^2/s): ").strip()
-            par_val = float(par_input)
+            par_val = float(numeric_part)
             break
         except ValueError:
-            print("  [ERROR] Invalid input. Please enter a numerical PAR value.")
+            print("  [ERROR] Invalid structure. Input numeric PAR values (optional inline notes text allowed).")
 
-    photo_prompt = f"  Photo Reference [Default: {node.photo}]: "
-    photo_ref = input(photo_prompt).strip()
-    final_photo = photo_ref if photo_ref else node.photo
-
-    notes = input("  Notes [Default: Normal]: ").strip() or "Normal"
-    if active_mod:
-        notes = f"[{active_mod.upper()} MODIFIER] {notes}"
-    
-    node_dli = calculate_dli(par_val, photoperiod)
-    
     return {
-        "id": full_id,
+        "id": node.id,
         "zone": node.zone,
         "par": par_val,
-        "dli": node_dli,
-        "photo": final_photo,
-        "notes": notes
+        "dli": calculate_dli(par_val, photoperiod),
+        "photo": node.photo,
+        "notes": parsed_note
+    }
+
+def capture_adhoc_node(node: BotanicalNode, photoperiod: float, explicit_id: str) -> dict:
+    """Deep inspection data parsing for standalone ad-hoc additions at end of run."""
+    while True:
+        raw_input = input(f"    PAR value for {explicit_id}: ").strip()
+        try:
+            par_val = float(raw_input)
+            break
+        except ValueError:
+            print("  [ERROR] Ad-hoc entries require a valid numeric PAR value.")
+
+    modifier = input("    Modifier/Context (e.g., maple shade, cloud edge) [Enter for None]: ").strip()
+    notes = input("    Detailed Notes [Enter for Normal]: ").strip() or "Normal"
+    
+    final_id = f"{explicit_id}-{modifier.replace(' ', '_')}" if modifier else explicit_id
+    final_notes = f"[{modifier.upper()} MODIFIER] {notes}" if modifier else notes
+
+    return {
+        "id": final_id,
+        "zone": node.zone,
+        "par": par_val,
+        "dli": calculate_dli(par_val, photoperiod),
+        "photo": node.photo,
+        "notes": final_notes
     }
 
 def run_wizard():
     print("==========================================================")
-    print("      GOLDEN_STATE PAR Data Ingestion Wizard (v2.3.0)     ")
+    print("      GOLDEN_STATE PAR Data Ingestion Wizard (v2.5.2)     ")
     print("==========================================================")
     
     # 1. Global Metadata Initialization
@@ -121,15 +144,15 @@ def run_wizard():
     if not log_date:
         log_date = datetime.now().strftime("%Y-%m-%d")
         
-    time_start = input("Enter start time (HHMM, e.g., 0930): ").strip()
-    time_end = input("Enter end time (HHMM, e.g., 0945): ").strip()
-    temp_f = input("Enter outdoor temperature (°F, e.g., 78): ").strip()
+    time_start = input("Enter start time (HHMM, e.g., 1745): ").strip()
+    time_end = input("Enter end time (HHMM, e.g., 1751): ").strip()
+    temp_f = input("Enter outdoor temperature (°F, e.g., 90): ").strip()
     sky_conditions = input("Sky conditions (S=Sunny, PC=Partly Cloudy, MC=Mostly Cloudy, R=Rain): ").strip().upper()
     photoperiod = float(input("Photoperiod basis (hours) [Default: 14.0]: ") or 14.0)
 
     # 2. Scope Matrix Selector Configuration
     PATH_SCOPES = {
-        "1": ("Full Property Master Loop (All 29 Registered Nodes)", ["House Bed", "Basement Bed", "Sunroom", "Living Room", "Light Arrays"]),
+        "1": ("Full Property Master Loop (All 26 Registered Nodes)", ["House Bed", "Basement Bed", "Sunroom", "Living Room", "Light Arrays"]),
         "2": ("Exterior Infrastructure Tracking Only (HB + BB)", ["House Bed", "Basement Bed"]),
         "3": ("Sunroom Interior Cohort Only (Clockwise 11-Station Sweep)", ["Sunroom"]),
         "4": ("Living Room & Light Arrays Expansion Array Only (LR + LA)", ["Living Room", "Light Arrays"]),
@@ -142,26 +165,20 @@ def run_wizard():
     scope_choice = input("Select scope profile index [Default: 1]: ").strip() or "1"
     active_zones = PATH_SCOPES.get(scope_choice, PATH_SCOPES["1"])[1]
     
-    # Filter global sequence to track targeted path profiles cleanly
     scoped_walkpath = [node for node in GLOBAL_NODE_REGISTRY if node.zone in active_zones]
     logged_data = []
 
-    # 3. Main Scoped Traversal Processing Execution Loop
+    # 3. Main Scoped Traversal Ingestion Loop
     print(f"\n--- Beginning Scoped Execution Path ({len(scoped_walkpath)} Registry Targets) ---")
     for idx, node in enumerate(scoped_walkpath, 1):
-        print(f"\n[{idx:02d}/{len(scoped_walkpath)}] Scoped Anchor Station: {node.id} ({node.zone})")
-        print(f"       Description Hint: {node.desc}")
-        
-        mod_input = input(f"  Condition modifier suffix (optional, e.g., shade): ").strip()
-        full_node_id = f"{node.id}-{mod_input}" if mod_input else node.id
-        _, active_mod = parse_node_string(full_node_id)
-        
-        metrics = capture_node_metrics(node, active_mod, full_node_id, photoperiod, sky_conditions)
+        # UI Fix: Injected node.desc directly into the loop header block
+        print(f"\n[{idx:02d}/{len(scoped_walkpath)}] {node.zone} -> {node.id} | {node.desc}")
+        metrics = capture_default_node(node, photoperiod)
         logged_data.append(metrics)
 
     # 4. Open-Ended Dynamic Ad-Hoc Intercept Phase
     print("\n--- Initializing Ad-Hoc Checkpoint Target Acquisition Phase ---")
-    print("Type any Node ID manually to append targeted captures on-the-fly.")
+    print("Type any Node ID manually to append targeted captures with custom modifiers/notes.")
     print("To terminate data ingestion and build the final ledger entry, type 'q'.")
     
     while True:
@@ -171,19 +188,17 @@ def run_wizard():
         if not adhoc_input:
             continue
             
-        base_id, active_mod = parse_node_string(adhoc_input)
-        existing_node = lookup_registered_node(base_id)
+        existing_node = lookup_registered_node(adhoc_input)
         
         if existing_node:
-            print(f"  [+] Registered target matching '{base_id}' extracted from global database.")
+            print(f"  [+] Registered target matching '{adhoc_input}' extracted from global database.")
             current_node = existing_node
         else:
-            print(f"  [!] Dynamic Target Unregistered: '{base_id}' falls outside standard configuration profiles.")
+            print(f"  [!] Dynamic Target Unregistered: '{adhoc_input}' falls outside standard configuration profiles.")
             adhoc_zone = input("  Assign Category/Zone classification for this ledger trace: ").strip() or "Dynamic Verification"
-            adhoc_desc = input("  Provide unique structural landmark description details: ").strip() or "Ad-hoc manual tracking marker"
-            current_node = BotanicalNode(id=base_id, zone=adhoc_zone, desc=adhoc_desc, photo="adhoc-untracked-capture.jpg")
+            current_node = BotanicalNode(id=adhoc_input, zone=adhoc_zone, desc="Ad-hoc manual tracking marker", photo="adhoc-untracked-capture.jpg")
             
-        metrics = capture_node_metrics(current_node, active_mod, adhoc_input, photoperiod, sky_conditions)
+        metrics = capture_adhoc_node(current_node, photoperiod, adhoc_input)
         logged_data.append(metrics)
 
     # 5. Front Matter Generation Block Assembly Execution
@@ -213,7 +228,7 @@ sky_conditions: "{sky_conditions}"
   - Notes: {item['notes']}
 """
 
-    # 6. File Compression Generation Assembly & Local Disk Writing Path Routing
+    # 6. Output Assembly & Local Disk Writing Path Routing
     bucket_dir = os.path.join("logs", "PAR-bucket")
     os.makedirs(bucket_dir, exist_ok=True)
 
